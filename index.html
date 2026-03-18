@@ -242,9 +242,9 @@
     .blog-coming-soon{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.75rem;font-family:var(--font-mono);color:var(--text-3);padding:3px 8px;background:var(--bg-3);border-radius:4px;}
 
     /* CHATBOT */
-    .chatbot-trigger{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:var(--accent);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 24px var(--accent-glow-strong);transition:all var(--transition);z-index:90;}
+    .chatbot-trigger{position:fixed;bottom:88px;right:28px;width:56px;height:56px;background:var(--accent);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 24px var(--accent-glow-strong);transition:all var(--transition);z-index:90;}
     .chatbot-trigger:hover{transform:scale(1.1) translateY(-2px);}
-    .chatbot-panel{position:fixed;bottom:96px;right:28px;width:360px;max-height:480px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:90;display:flex;flex-direction:column;transform:translateY(20px);opacity:0;pointer-events:none;transition:all var(--transition);}
+    .chatbot-panel{position:fixed;bottom:156px;right:28px;width:360px;max-height:480px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:90;display:flex;flex-direction:column;transform:translateY(20px);opacity:0;pointer-events:none;transition:all var(--transition);}
     .chatbot-panel.open{transform:translateY(0);opacity:1;pointer-events:all;}
     .chatbot-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
     .chatbot-head-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-glow);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1rem;}
@@ -315,7 +315,7 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">Abhishek<span>.</span></a>
+  <a href="#hero" class="nav-logo">Abhishek</a>
   <ul class="nav-links">
     <li><a href="#about" data-i18n="nav.about">About</a></li>
     <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
@@ -353,7 +353,7 @@
     <div class="hero-grid">
       <div>
         <div class="hero-availability"><span class="dot"></span><span data-i18n="hero.availability">Open to Senior Roles · Amersfoort, Netherlands 🇳🇱</span></div>
-        <h1 class="hero-name">Abhishek<br>Anandaram<span class="accent">.</span></h1>
+        <h1 class="hero-name">Abhishek<br>Anandaram</h1>
         <p class="hero-role" data-i18n="hero.role">Senior Full Stack Java Engineer</p>
         <p class="hero-tagline" data-i18n="hero.tagline">
           I build backend systems that scale — and the AI that makes them smarter. <strong>14 years</strong> delivering enterprise Java applications across <strong>KPN, ABN Amro, FedEx, and TomTom</strong> — full stack with Java, Angular, Kafka, Docker, and AWS.
@@ -377,12 +377,12 @@
           <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> cat profile.json</span></div>
           <div class="t-output">{</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-string">"Abhishek Anandaram"</span>,</div>
-          <div class="t-output">&nbsp;&nbsp;<span class="t-key">"experience"</span>: <span class="t-string">"14 years Java"</span>,</div>
+          <div class="t-output">&nbsp;&nbsp;<span class="t-key">"experience"</span>: <span class="t-string" data-i18n="term.experience">14 years Java</span>,</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"stack"</span>: [<span class="t-string">"Java 17"</span>, <span class="t-string">"Spring Boot 3"</span>, <span class="t-string">"Kafka"</span>],</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"frontend"</span>: [<span class="t-string">"Angular"</span>, <span class="t-string">"TypeScript"</span>],</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"infra"</span>: [<span class="t-string">"Docker"</span>, <span class="t-string">"Kubernetes"</span>, <span class="t-string">"Azure AKS"</span>],</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"clients"</span>: [<span class="t-string">"KPN"</span>, <span class="t-string">"ABN Amro"</span>, <span class="t-string">"FedEx"</span>, <span class="t-string">"TomTom"</span>, <span class="t-string">"ASML"</span>],</div>
-          <div class="t-output">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-string">"Amersfoort, Netherlands"</span>,</div>
+          <div class="t-output">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-string" data-i18n="term.location">Amersfoort, Netherlands</span>,</div>
           <div class="t-output">&nbsp;&nbsp;<span class="t-key">"openToWork"</span>: <span class="t-val">true</span></div>
           <div class="t-output">}</div>
           <br>
@@ -439,29 +439,7 @@
         <p class="reveal reveal-delay-2" data-i18n="about.p3">
           I hold a <strong>BE in Computer Science</strong> from JSS Academy (Visveswaraya Technological University, 2011). After a decade building foundations in India across Cognizant, Siemens, and Capgemini, I moved to the Netherlands and have been delivering complex backend applications for Dutch enterprise ever since.
         </p>
-        <div class="about-principles reveal reveal-delay-3">
-          <div class="principle-item">
-            <div class="principle-icon">⚙️</div>
-            <div class="principle-text">
-              <strong data-i18n="about.pr1t">Architecture-first, always</strong>
-              <span data-i18n="about.pr1s">Led microservices design at FedEx — API Gateway, Kafka schemas, and DB design before a single feature line is written.</span>
-            </div>
-          </div>
-          <div class="principle-item">
-            <div class="principle-icon">📊</div>
-            <div class="principle-text">
-              <strong data-i18n="about.pr2t">Observability is standard kit</strong>
-              <span data-i18n="about.pr2s">Elastic Stack, Prometheus, Grafana, Kibana, SonarQube — not bolted on after, built in from day one.</span>
-            </div>
-          </div>
-          <div class="principle-item">
-            <div class="principle-icon">🚀</div>
-            <div class="principle-text">
-              <strong data-i18n="about.pr3t">Ship fast, stay reliable</strong>
-              <span data-i18n="about.pr3s">CI/CD pipelines, automated tests, and Docker-based deployments — so every release is repeatable and low-risk.</span>
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="reveal reveal-delay-2">
         <div class="philosophy-card">
@@ -633,10 +611,7 @@
           <span class="stack-tag">Kubernetes</span><span class="stack-tag">Azure DevOps</span><span class="stack-tag">Jenkins</span>
           <span class="stack-tag">Elastic Stack</span><span class="stack-tag">MySQL</span>
         </div>
-        <div class="project-links">
-          <a href="https://github.com/abhisheksa09" target="_blank" class="project-link github">⬡ GitHub →</a>
-        </div>
-      </div>
+</div>
     </div>
 
     <div class="projects-grid">
@@ -674,10 +649,7 @@
             <span class="stack-tag">API Gateway</span><span class="stack-tag">Gradle</span><span class="stack-tag">Docker</span>
             <span class="stack-tag">Azure AKS</span><span class="stack-tag">Swagger / OpenAPI</span>
           </div>
-          <div class="project-links">
-            <a href="https://github.com/abhisheksa09" target="_blank" class="project-link github">⬡ GitHub →</a>
-          </div>
-        </div>
+</div>
       </div>
 
       <!-- ABN Amro MS Teams -->
@@ -710,10 +682,7 @@
             <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Vue.js</span>
             <span class="stack-tag">MS Teams API</span><span class="stack-tag">Azure DevOps</span><span class="stack-tag">REST</span>
           </div>
-          <div class="project-links">
-            <a href="https://github.com/abhisheksa09" target="_blank" class="project-link github">⬡ GitHub →</a>
-          </div>
-        </div>
+</div>
       </div>
     </div>
   </div>
@@ -884,8 +853,8 @@
       <p class="contact-desc reveal reveal-delay-2" data-i18n="contact.desc">
         14 years building Java, Angular, Kafka, Docker and full-stack enterprise applications. Open to senior engineering and solution architecture roles across the Netherlands and beyond.
       </p>
-      <a href="/cdn-cgi/l/email-protection#58393a30312b303d332b39766861183f35393134763b3735" class="contact-email reveal reveal-delay-2">
-        ✉ <span class="__cf_email__" data-cfemail="c8a9aaa0a1bba0ada3bba9e6f8f188afa5a9a1a4e6aba7a5">[email&#160;protected]</span>
+      <a href="mailto:abhisheksa.09@gmail.com" class="contact-email reveal reveal-delay-2">
+        ✉ abhisheksa.09@gmail.com
       </a>
       <div class="contact-socials reveal reveal-delay-3">
         <a href="https://linkedin.com/in/abhishek-s-a-55bab92a" target="_blank" class="social-btn">
@@ -924,11 +893,11 @@
     <div class="chat-msg bot" id="chatLang">Hi! Ask me anything about Abhishek's 14-year Java career — his work at KPN, FedEx, ABN Amro, TomTom, or his tech stack.</div>
   </div>
   <div class="chat-suggestions" id="chatSuggestions">
-    <button class="chat-suggestion" data-q-en="What did Abhishek build at KPN?" data-q-nl="Wat heeft Abhishek bij KPN gebouwd?" onclick="askQuestion(this)">KPN?</button>
-    <button class="chat-suggestion" data-q-en="Tell me about the FedEx project" data-q-nl="Vertel over het FedEx-project" onclick="askQuestion(this)">FedEx?</button>
-    <button class="chat-suggestion" data-q-en="What is his Kafka experience?" data-q-nl="Wat is zijn Kafka-ervaring?" onclick="askQuestion(this)">Kafka?</button>
-    <button class="chat-suggestion" data-q-en="Which clients has he worked for?" data-q-nl="Voor welke klanten heeft hij gewerkt?" onclick="askQuestion(this)">Klanten?</button>
-    <button class="chat-suggestion" data-q-en="Is he available for work?" data-q-nl="Is hij beschikbaar?" onclick="askQuestion(this)">Beschikbaar?</button>
+    <button class="chat-suggestion" data-q-en="Why should I hire Abhishek?" data-q-nl="Waarom zou ik Abhishek aannemen?" onclick="askQuestion(this)">Why hire him?</button>
+    <button class="chat-suggestion" data-q-en="What questions can I ask you?" data-q-nl="Wat kan ik je vragen?" onclick="askQuestion(this)">What can I ask?</button>
+    <button class="chat-suggestion" data-q-en="Which clients has he worked for?" data-q-nl="Voor welke klanten heeft hij gewerkt?" onclick="askQuestion(this)">Clients?</button>
+    <button class="chat-suggestion" data-q-en="What is his tech stack?" data-q-nl="Wat is zijn tech stack?" onclick="askQuestion(this)">Tech stack?</button>
+    <button class="chat-suggestion" data-q-en="Is he available for work?" data-q-nl="Is hij beschikbaar?" onclick="askQuestion(this)">Available?</button>
     <button class="chat-suggestion" data-q-en="What is his Azure experience?" data-q-nl="Wat is zijn Azure-ervaring?" onclick="askQuestion(this)">Azure?</button>
   </div>
   <div class="chatbot-input">
@@ -979,6 +948,8 @@
       'contact.label':'06 — Contact','contact.title':"Let's build something<br><em>worth shipping.</em>",
       'contact.desc':'14 years building Java, Angular, Kafka, Docker and full-stack enterprise applications. Open to senior engineering and solution architecture roles across the Netherlands and beyond.',
       'chat.title':'Ask about Abhishek','chat.sub':'Java · Angular · Kafka · Docker · Full Stack',
+      'term.experience':'14 years Java',
+      'term.location':'Amersfoort, Netherlands',
     },
     nl: {
       'nav.about':'Over mij','nav.skills':'Vaardigheden','nav.projects':'Projecten',
@@ -1017,6 +988,8 @@
       'contact.label':'06 — Contact','contact.title':'Laten we iets bouwen<br><em>dat de moeite waard is.</em>',
       'contact.desc':'14 jaar Java-, Angular-, Kafka-, Docker- en full-stack enterprise-applicaties bouwen. Beschikbaar voor senior engineering- en solution architecture-functies in Nederland en daarbuiten.',
       'chat.title':'Vraag over Abhishek','chat.sub':'Java · Angular · Kafka · Docker · Full Stack',
+      'term.experience':'14 jaar Java',
+      'term.location':'Amersfoort, Nederland',
     }
   };
 
@@ -1209,6 +1182,10 @@
        ans:'Download Abhishek\'s CV using the <strong>↓ Resume</strong> button in the top navigation bar.'},
       {keys:['who is','tell me about','introduce','about abhishek','what does he do','overview','summary'],
        ans:'Abhishek Anandaram is a <strong>Senior Full Stack Java Engineer</strong> with 14 years of experience. He specialises in Java 17, Spring Boot 3, microservices, Angular, Kafka, Docker, and Azure AKS — delivered across 8 enterprise clients in telecom, banking, logistics, and more in the Netherlands.'},
+      {keys:['why hire','why should','why him','reason to hire','what makes him','stand out','different','unique','better than','value add','case for','convince','recommend'],
+       ans:'Here\'s the case for hiring Abhishek:<br><br>✅ <strong>14 years, zero gaps</strong> — continuous delivery across 8 enterprise clients in the Netherlands and India.<br>✅ <strong>Full stack ownership</strong> — from Angular UI to Java backend to AKS deployment, he covers the whole chain.<br>✅ <strong>Proven at scale</strong> — KPN (telecom), ABN Amro (banking), FedEx (logistics), TomTom (navigation).<br>✅ <strong>Architecture experience</strong> — promoted to Solution Architect at FedEx, led microservices design teams.<br>✅ <strong>Cloud-native</strong> — Docker, Kubernetes, Azure AKS, CI/CD pipelines in production daily.<br>✅ <strong>Netherlands-based</strong> — no relocation, no visa complexity, available now.'},
+      {keys:['what can i ask','what questions','help me with','what do you know','topics','what can you answer','how can you help','guide me','what should i ask'],
+       ans:'You can ask me about:<br><br>🏢 <strong>Clients & projects</strong> — KPN, ABN Amro, FedEx, TomTom, ASML, Siemens, Delta Airlines<br>☕ <strong>Tech stack</strong> — Java, Spring Boot, Kafka, Angular, Docker, Kubernetes, Azure<br>📅 <strong>Experience</strong> — how long, at what level, which domains<br>📍 <strong>Availability</strong> — is he open to work, location, remote/hybrid<br>🎓 <strong>Education</strong> — degree, university<br>💪 <strong>Strengths</strong> — what makes him stand out<br>🗣 <strong>Languages</strong> — what languages does he speak<br>📞 <strong>Contact</strong> — email, phone, LinkedIn<br>📄 <strong>CV</strong> — how to download his resume'},
     ],
     nl:[
       {keys:['kpn','prodapt','huidige rol','huidige baan','momenteel','nu','huidig'],
@@ -1265,6 +1242,10 @@
        ans:'Download het CV via de <strong>↓ CV</strong>-knop in de navigatiebalk bovenaan.'},
       {keys:['wie is','vertel over','introductie','over abhishek','wat doet hij','overzicht','samenvatting'],
        ans:'Abhishek Anandaram is een <strong>Senior Full Stack Java Engineer</strong> met 14 jaar ervaring in Java 17, Spring Boot 3, Angular, Kafka, Docker en Azure AKS — geleverd aan 8 grote klanten in Nederland.'},
+      {keys:['waarom aannemen','waarom hij','reden om aan te nemen','wat maakt hem','onderscheidt','uniek','toegevoegde waarde','overtuig','aanbevelen','waarom zou ik'],
+       ans:'De case voor het aannemen van Abhishek:<br><br>✅ <strong>14 jaar, geen gaten</strong> — doorlopende levering bij 8 enterprise klanten in Nederland en India.<br>✅ <strong>Full stack eigenaarschap</strong> — van Angular UI tot Java backend tot AKS-deployment, hij dekt de hele keten.<br>✅ <strong>Bewezen op schaal</strong> — KPN (telecom), ABN Amro (bankwezen), FedEx (logistiek), TomTom (navigatie).<br>✅ <strong>Architectuurervaring</strong> — gepromoveerd tot Solution Architect bij FedEx, leidde microservicesteams.<br>✅ <strong>Cloud-native</strong> — Docker, Kubernetes, Azure AKS, CI/CD-pipelines dagelijks in productie.<br>✅ <strong>Gevestigd in Nederland</strong> — geen verhuizing, geen visakwesties, nu beschikbaar.'},
+      {keys:['wat kan ik vragen','welke vragen','waarmee kun je helpen','wat weet je','onderwerpen','wat kun je beantwoorden','hoe kun je helpen','gids','wat moet ik vragen'],
+       ans:'Je kunt me vragen stellen over:<br><br>🏢 <strong>Klanten & projecten</strong> — KPN, ABN Amro, FedEx, TomTom, ASML, Siemens, Delta Airlines<br>☕ <strong>Tech stack</strong> — Java, Spring Boot, Kafka, Angular, Docker, Kubernetes, Azure<br>📅 <strong>Ervaring</strong> — hoe lang, op welk niveau, welke domeinen<br>📍 <strong>Beschikbaarheid</strong> — is hij beschikbaar, locatie, remote/hybride<br>🎓 <strong>Opleiding</strong> — diploma, universiteit<br>💪 <strong>Sterktes</strong> — wat maakt hem uniek<br>🗣 <strong>Talen</strong> — welke talen spreekt hij<br>📞 <strong>Contact</strong> — e-mail, telefoon, LinkedIn<br>📄 <strong>CV</strong> — hoe het CV te downloaden'},
     ]
   };
 
