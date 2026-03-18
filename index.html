@@ -853,8 +853,8 @@
       <p class="contact-desc reveal reveal-delay-2" data-i18n="contact.desc">
         14 years building Java, Angular, Kafka, Docker and full-stack enterprise applications. Open to senior engineering and solution architecture roles across the Netherlands and beyond.
       </p>
-      <a href="mailto:abhisheksa.09@gmail.com" class="contact-email reveal reveal-delay-2">
-        ✉ abhisheksa.09@gmail.com
+      <a href="/cdn-cgi/l/email-protection#d6b7b4bebfa5beb3bda5b7f8e6ef96b1bbb7bfbaf8b5b9bb" class="contact-email reveal reveal-delay-2">
+        ✉ <span class="__cf_email__" data-cfemail="81e0e3e9e8f2e9e4eaf2e0afb1b8c1e6ece0e8edafe2eeec">[email&#160;protected]</span>
       </a>
       <div class="contact-socials reveal reveal-delay-3">
         <a href="https://linkedin.com/in/abhishek-s-a-55bab92a" target="_blank" class="social-btn">
@@ -906,7 +906,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ============================================================
   //  INTERNATIONALISATION  (EN default, NL toggle)
   // ============================================================
@@ -1168,7 +1168,7 @@
        ans:'Abhishek has <strong>14 years</strong> of Java engineering experience (since 2012) across telecom (KPN), banking (ABN Amro), logistics (FedEx), navigation (TomTom), semiconductor (ASML), industrial (Siemens), insurance (Bharti AXA), and airline (Delta Airlines).'},
       {keys:['strength','strong','best at','key skill','top skill','value','bring to','offer','superpower'],
        ans:'Key strengths: <strong>Java backend architecture</strong> (microservices, Spring Boot, Kafka), <strong>cloud deployments</strong> (Azure AKS, Docker, Kubernetes), <strong>full-stack delivery</strong> (Angular + Java), and leading technical decisions from design through to production.'},
-      {keys:['available','open to','looking','job','hire','opportunit','role','position','work','recruit','notice','start','when can','join'],
+      {keys:['available','open to','looking','job','opportunit','role','position','recruit','notice','start','when can','join','contract'],
        ans:'✅ Yes — Abhishek is actively open to senior engineering and solution architecture roles.<br>📍 Amersfoort, Netherlands<br>📧 abhisheksa.09@gmail.com<br>📞 +31 6 22 22 36 98<br>💼 linkedin.com/in/abhishek-s-a-55bab92a'},
       {keys:['location','netherlands','amersfoort','where','live','remote','hybrid','office','relocat'],
        ans:'Based in <strong>Amersfoort, Netherlands</strong>. Open to hybrid and on-site roles in the Netherlands, and can discuss remote or relocation arrangements.'},
@@ -1255,17 +1255,49 @@
   };
 
   function getBotResponse(msg){
-    const lower = msg.toLowerCase();
-    const entries = kb[currentLang] || kb.en;
-    for(const entry of entries){
-      if(entry.keys.some(k => lower.includes(k))) return entry.ans;
-    }
-    // Also try EN as fallback if NL selected but no NL match (for tech terms typed in English)
-    if(currentLang === 'nl'){
-      for(const entry of kb.en){
-        if(entry.keys.some(k => lower.includes(k))) return entry.ans;
+    const lower = msg.toLowerCase()
+      .replace(/[?!.,;:]/g, ' ')   // strip punctuation so "hire?" → "hire "
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // Tokenise the user message into individual words
+    const words = lower.split(' ').filter(w => w.length > 1);
+
+    function scoreEntry(entry) {
+      let score = 0;
+      for (const key of entry.keys) {
+        if (lower.includes(key)) {
+          // Longer / more specific keys score higher (penalise single-word collisions)
+          score += key.split(' ').length * 2;
+          // Exact word boundary bonus: whole word match scores more than substring
+          const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          if (new RegExp(`\\b${escaped}\\b`).test(lower)) score += 1;
+        }
       }
+      return score;
     }
+
+    function bestMatch(entries) {
+      let best = null, bestScore = 0;
+      for (const entry of entries) {
+        const s = scoreEntry(entry);
+        if (s > bestScore) { bestScore = s; best = entry; }
+      }
+      // Require at least a minimal signal — single very common words shouldn't fire
+      return bestScore > 0 ? best : null;
+    }
+
+    // Try current language first
+    const entries = kb[currentLang] || kb.en;
+    const match = bestMatch(entries);
+    if (match) return match.ans;
+
+    // Fallback: try EN KB for tech terms typed in English while in NL mode
+    if (currentLang === 'nl') {
+      const enMatch = bestMatch(kb.en);
+      if (enMatch) return enMatch.ans;
+    }
+
     return fallback[currentLang] || fallback.en;
   }
 
@@ -1297,11 +1329,4 @@
   function askQuestion(btnOrStr){
     const q = typeof btnOrStr === 'string'
       ? btnOrStr
-      : (btnOrStr.getAttribute('data-q-' + currentLang) || btnOrStr.getAttribute('data-q-en'));
-    document.getElementById('chatInput').value = q;
-    sendChat();
-  }
-  function handleChatKey(e){if(e.key==='Enter')sendChat();}
-</script>
-</body>
-</html>
+   
