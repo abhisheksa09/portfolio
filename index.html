@@ -1329,4 +1329,11 @@
   function askQuestion(btnOrStr){
     const q = typeof btnOrStr === 'string'
       ? btnOrStr
-   
+      : (btnOrStr.getAttribute('data-q-' + currentLang) || btnOrStr.getAttribute('data-q-en'));
+    document.getElementById('chatInput').value = q;
+    sendChat();
+  }
+  function handleChatKey(e){ if(e.key === 'Enter') sendChat(); }
+</script>
+</body>
+</html>
