@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Anandaram — Senior Full Stack Java Developer</title>
-  <meta name="description" content="Senior Full Stack Java Developer with 14 years of experience. Java 17, Spring Boot 3, Microservices, Azure AKS, Kafka. Based in Amersfoort, Netherlands. Dutch national." />
+  <meta name="description" content="Senior Full Stack Java Developer with 14 years of experience. Java 17, Spring Boot 3, Microservices, Azure AKS, Kafka. Based in Amersfoort, Netherlands." />
   <meta name="keywords" content="Java Developer, Spring Boot, Microservices, Azure AKS, Kafka, Kubernetes, Docker, Angular, Netherlands, KPN, FedEx, ABN Amro, TomTom, ASML" />
   <meta property="og:title" content="Abhishek Anandaram — Senior Full Stack Java Developer" />
-  <meta property="og:description" content="14 years building enterprise Java systems. Currently at Prodapt · KPN, Netherlands." />
+  <meta property="og:description" content="14 years building enterprise Java applications." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,8 +199,10 @@
     /* EXPERIENCE */
     #experience{padding:120px 0;background:var(--bg-2);}
     .exp-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;}
-    .exp-nav{position:sticky;top:100px;}
-    .exp-nav-item{display:block;width:100%;text-align:left;padding:14px 20px;border-radius:var(--radius);font-size:0.85rem;color:var(--text-3);transition:all var(--transition);border-left:2px solid transparent;}
+    /* Left panel: sticky within the section, capped so it never overflows */
+    .exp-left{position:sticky;top:88px;max-height:calc(100vh - 120px);display:flex;flex-direction:column;}
+    .exp-nav{margin-top:48px;flex:1;overflow-y:auto;}
+    .exp-nav-item{display:block;width:100%;text-align:left;padding:14px 20px;border-radius:var(--radius);font-size:0.85rem;color:var(--text-3);transition:all var(--transition);border-left:2px solid transparent;background:transparent;}
     .exp-nav-item.active,.exp-nav-item:hover{color:var(--text);border-left-color:var(--accent);background:var(--accent-glow);padding-left:28px;}
     .exp-items{display:flex;flex-direction:column;gap:28px;}
     .exp-item{padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all var(--transition);}
@@ -295,9 +297,16 @@
     .hero-stats{animation:fadeInUp 0.8s ease 0.5s both;}
     .hero-terminal{animation:fadeInUp 0.8s ease 0.3s both;}
 
+    /* LANG TOGGLE */
+    .lang-toggle{display:flex;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color var(--transition);}
+    .lang-toggle:hover{border-color:var(--accent);}
+    .lang-btn{padding:7px 11px;font-family:var(--font-mono);font-size:0.72rem;font-weight:600;letter-spacing:0.06em;color:var(--text-3);transition:all var(--transition);background:transparent;border:none;cursor:pointer;}
+    .lang-btn.active{background:var(--accent);color:#000;}
+    .lang-btn:not(.active):hover{color:var(--text);}
+
     /* RESPONSIVE */
     @media(max-width:1100px){.skills-grid{grid-template-columns:repeat(2,1fr);}.project-card.featured{grid-column:span 1;grid-template-columns:1fr;}.projects-grid{grid-template-columns:1fr;}}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-terminal{display:none;}.about-grid{grid-template-columns:1fr;}.exp-grid{grid-template-columns:1fr;}.exp-nav{display:none;}nav{padding:16px 24px;}.nav-links{display:none;}.hamburger{display:flex;}.nav-cta{display:none;}.container{padding:0 24px;}footer{padding:24px;}}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-terminal{display:none;}.about-grid{grid-template-columns:1fr;}.exp-grid{grid-template-columns:1fr;}.exp-left{display:none;}nav{padding:16px 24px;}.nav-links{display:none;}.hamburger{display:flex;}.nav-cta{display:none;}.container{padding:0 24px;}footer{padding:24px;}}
     @media(max-width:600px){.skills-grid{grid-template-columns:1fr;}.hero-stats{gap:24px;flex-wrap:wrap;}.hero-actions{flex-direction:column;}.blog-grid{grid-template-columns:1fr;}.chatbot-panel{width:calc(100vw - 56px);right:16px;}}
   </style>
 </head>
@@ -308,26 +317,30 @@
 <nav id="navbar">
   <a href="#hero" class="nav-logo">Abhishek<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#blog">Writing</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-i18n="nav.about">About</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+    <li><a href="#blog" data-i18n="nav.writing">Writing</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" id="langEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="langNL" onclick="setLang('nl')">NL</button>
+    </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
-    <a href="#" class="nav-cta" onclick="downloadResume(event)">↓ Resume</a>
+    <a href="#" class="nav-cta" data-i18n="nav.resume" onclick="downloadResume(event)">↓ Resume</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-nav" id="mobileNav">
-  <a href="#about" onclick="closeNav()">About</a>
-  <a href="#skills" onclick="closeNav()">Skills</a>
-  <a href="#projects" onclick="closeNav()">Projects</a>
-  <a href="#experience" onclick="closeNav()">Experience</a>
-  <a href="#contact" onclick="closeNav()">Contact</a>
+  <a href="#about" onclick="closeNav()" data-i18n="nav.about">About</a>
+  <a href="#skills" onclick="closeNav()" data-i18n="nav.skills">Skills</a>
+  <a href="#projects" onclick="closeNav()" data-i18n="nav.projects">Projects</a>
+  <a href="#experience" onclick="closeNav()" data-i18n="nav.experience">Experience</a>
+  <a href="#contact" onclick="closeNav()" data-i18n="nav.contact">Contact</a>
 </div>
 
 <!-- HERO -->
@@ -339,20 +352,20 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="hero-availability"><span class="dot"></span>Open to Senior Roles · Amersfoort, Netherlands 🇳🇱</div>
+        <div class="hero-availability"><span class="dot"></span><span data-i18n="hero.availability">Open to Senior Roles · Amersfoort, Netherlands 🇳🇱</span></div>
         <h1 class="hero-name">Abhishek<br>Anandaram<span class="accent">.</span></h1>
-        <p class="hero-role">Senior Full Stack Java Engineer</p>
-        <p class="hero-tagline">
+        <p class="hero-role" data-i18n="hero.role">Senior Full Stack Java Engineer</p>
+        <p class="hero-tagline" data-i18n="hero.tagline">
           I build backend systems that scale — and the AI that makes them smarter. <strong>14 years</strong> delivering enterprise Java systems across <strong>KPN, ABN Amro, FedEx, and TomTom</strong> — from Spring Boot microservices to Azure AKS production deployments.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn-primary">View My Work →</a>
-          <a href="#contact" class="btn-outline">Let's Connect</a>
+          <a href="#projects" class="btn-primary" data-i18n="hero.cta1">View My Work →</a>
+          <a href="#contact" class="btn-outline" data-i18n="hero.cta2">Let's Connect</a>
         </div>
         <div class="hero-stats">
-          <div><div class="hero-stat-num">14<span>+</span></div><div class="hero-stat-label">Years in Java</div></div>
-          <div><div class="hero-stat-num">8<span>+</span></div><div class="hero-stat-label">Enterprise Clients</div></div>
-          <div><div class="hero-stat-num">🇳🇱</div><div class="hero-stat-label">Dutch National</div></div>
+          <div><div class="hero-stat-num">14<span>+</span></div><div class="hero-stat-label" data-i18n="hero.stat1">Years in Java</div></div>
+          <div><div class="hero-stat-num">8<span>+</span></div><div class="hero-stat-label" data-i18n="hero.stat2">Enterprise Clients</div></div>
+          <div><div class="hero-stat-num">🇳🇱</div><div class="hero-stat-label" data-i18n="hero.stat3">Dutch National</div></div>
         </div>
       </div>
       <div class="hero-terminal">
@@ -415,15 +428,15 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-text">
-        <div class="section-label reveal">01 — About</div>
-        <h2 class="section-title reveal reveal-delay-1">14 years. Eight clients.<br><em style="font-style:italic;color:var(--accent)">One discipline.</em></h2>
-        <p class="reveal reveal-delay-2">
+        <div class="section-label reveal" data-i18n="about.label">01 — About</div>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="about.title">14 years. Eight clients.<br><em style="font-style:italic;color:var(--accent)">One discipline.</em></h2>
+        <p class="reveal reveal-delay-2" data-i18n="about.p1">
           I'm a <strong>Dutch national Java engineer</strong> based in Amersfoort, Netherlands, with over 14 years delivering enterprise-grade backend systems. My clients have included <strong>KPN, ABN Amro Bank, FedEx Express, TomTom, ASML, Siemens, Bharti AXA, and Delta Airlines</strong> — organisations where reliability and uptime are non-negotiable.
         </p>
-        <p class="reveal reveal-delay-2">
+        <p class="reveal reveal-delay-2" data-i18n="about.p2">
           My core is <strong>Java 17 + Spring Boot 3 + microservices</strong>, wired into cloud-native infrastructure on <strong>Azure AKS</strong>. I've led architecture teams at FedEx, served as Scrum Master at ABN Amro, designed Kafka-driven event pipelines, and built CI/CD practices that teams still run on years later.
         </p>
-        <p class="reveal reveal-delay-2">
+        <p class="reveal reveal-delay-2" data-i18n="about.p3">
           I hold a <strong>BE in Computer Science</strong> from JSS Academy (Visveswaraya Technological University, 2011). After a decade building foundations in India across Cognizant, Siemens, and Capgemini, I moved to the Netherlands and have been delivering complex backend systems for Dutch enterprise ever since.
         </p>
         <div class="about-principles reveal reveal-delay-3">
@@ -497,10 +510,10 @@
   <div class="container">
     <div class="skills-intro">
       <div>
-        <div class="section-label reveal">02 — Skills</div>
-        <h2 class="section-title reveal reveal-delay-1">Full stack,<br>top to bottom.</h2>
+        <div class="section-label reveal" data-i18n="skills.label">02 — Skills</div>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="skills.title">Full stack,<br>top to bottom.</h2>
       </div>
-      <p class="section-subtitle reveal reveal-delay-2">From event-driven backends to containerised Azure deployments — 14 years across the full delivery pipeline.</p>
+      <p class="section-subtitle reveal reveal-delay-2" data-i18n="skills.subtitle">From event-driven backends to containerised Azure deployments — 14 years across the full delivery pipeline.</p>
     </div>
     <div class="skills-grid">
       <div class="skill-category reveal" style="--cat-color:#c8a96e;">
@@ -573,10 +586,10 @@
   <div class="container">
     <div class="projects-intro">
       <div>
-        <div class="section-label reveal">03 — Projects</div>
-        <h2 class="section-title reveal reveal-delay-1">Systems I've<br>shipped to production.</h2>
+        <div class="section-label reveal" data-i18n="projects.label">03 — Projects</div>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="projects.title">Systems I've<br>shipped to production.</h2>
       </div>
-      <p class="section-subtitle reveal reveal-delay-2">Architecture-first. Observable from day one. Built to survive real production loads.</p>
+      <p class="section-subtitle reveal reveal-delay-2" data-i18n="projects.subtitle">Architecture-first. Observable from day one. Built to survive real production loads.</p>
     </div>
 
     <!-- Featured: KPN Microservices Platform -->
@@ -711,17 +724,17 @@
 <section id="experience">
   <div class="container">
     <div class="exp-grid">
-      <div>
-        <div class="section-label reveal">04 — Experience</div>
-        <h2 class="section-title reveal reveal-delay-1">14 years.<br>8 clients.</h2>
-        <p class="section-subtitle reveal reveal-delay-2" style="margin-top:16px;">From Cognizant India to Prodapt Netherlands — real enterprise delivery at every scale.</p>
-        <div class="exp-nav reveal reveal-delay-3" style="margin-top:48px;">
-          <button class="exp-nav-item active">Prodapt · KPN</button>
-          <button class="exp-nav-item">Infosys · ABN Amro</button>
-          <button class="exp-nav-item">FedEx Express NL</button>
-          <button class="exp-nav-item">Sogeti · TomTom</button>
-          <button class="exp-nav-item">Capgemini · ASML</button>
-          <button class="exp-nav-item">Siemens + Cognizant</button>
+      <div class="exp-left">
+        <div class="section-label reveal" data-i18n="exp.label">04 — Experience</div>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="exp.title">14 years.<br>8 clients.</h2>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin-top:16px;" data-i18n="exp.subtitle">From Cognizant India to Prodapt Netherlands — real enterprise delivery at every scale.</p>
+        <div class="exp-nav reveal reveal-delay-3">
+          <button class="exp-nav-item active" data-i18n="exp.nav1">Prodapt · KPN</button>
+          <button class="exp-nav-item" data-i18n="exp.nav2">Infosys · ABN Amro</button>
+          <button class="exp-nav-item" data-i18n="exp.nav3">FedEx Express NL</button>
+          <button class="exp-nav-item" data-i18n="exp.nav4">Sogeti · TomTom</button>
+          <button class="exp-nav-item" data-i18n="exp.nav5">Capgemini · ASML</button>
+          <button class="exp-nav-item" data-i18n="exp.nav6">Siemens + Cognizant</button>
         </div>
       </div>
 
@@ -839,8 +852,8 @@
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
-    <div class="section-label reveal">05 — Writing</div>
-    <h2 class="section-title reveal reveal-delay-1">Technical writing,<br>coming soon.</h2>
+    <div class="section-label reveal" data-i18n="blog.label">05 — Writing</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="blog.title">Technical writing,<br>coming soon.</h2>
     <div class="blog-grid">
       <div class="blog-card reveal">
         <span class="blog-tag">Architecture</span>
@@ -868,13 +881,13 @@
 <section id="contact">
   <div class="container">
     <div class="contact-wrapper">
-      <div class="section-label reveal" style="justify-content:center;">06 — Contact</div>
-      <h2 class="contact-title reveal reveal-delay-1">Let's build something<br><em>worth shipping.</em></h2>
-      <p class="contact-desc reveal reveal-delay-2">
+      <div class="section-label reveal" style="justify-content:center;" data-i18n="contact.label">06 — Contact</div>
+      <h2 class="contact-title reveal reveal-delay-1" data-i18n="contact.title">Let's build something<br><em>worth shipping.</em></h2>
+      <p class="contact-desc reveal reveal-delay-2" data-i18n="contact.desc">
         14 years of enterprise Java, cloud-native Azure deployments, and cross-functional delivery. Open to senior engineering and solution architecture roles across the Netherlands and beyond.
       </p>
-      <a href="mailto:abhisheksa.09@gmail.com" class="contact-email reveal reveal-delay-2">
-        ✉ abhisheksa.09@gmail.com
+      <a href="/cdn-cgi/l/email-protection#58393a30312b303d332b39766861183f35393134763b3735" class="contact-email reveal reveal-delay-2">
+        ✉ <span class="__cf_email__" data-cfemail="c8a9aaa0a1bba0ada3bba9e6f8f188afa5a9a1a4e6aba7a5">[email&#160;protected]</span>
       </a>
       <div class="contact-socials reveal reveal-delay-3">
         <a href="https://linkedin.com/in/abhishek-s-a-55bab92a" target="_blank" class="social-btn">
@@ -910,13 +923,15 @@
     </div>
   </div>
   <div class="chatbot-msgs" id="chatMsgs">
-    <div class="chat-msg bot">Hi! Ask me anything about Abhishek's 14-year Java career — his work at KPN, FedEx, ABN Amro, TomTom, or his tech stack.</div>
+    <div class="chat-msg bot" id="chatLang">Hi! Ask me anything about Abhishek's 14-year Java career — his work at KPN, FedEx, ABN Amro, TomTom, or his tech stack.</div>
   </div>
   <div class="chat-suggestions" id="chatSuggestions">
-    <button class="chat-suggestion" onclick="askQuestion('What has Abhishek built at KPN?')">KPN work?</button>
-    <button class="chat-suggestion" onclick="askQuestion('What is his Azure AKS experience?')">Azure skills?</button>
-    <button class="chat-suggestion" onclick="askQuestion('Tell me about FedEx project')">FedEx project?</button>
-    <button class="chat-suggestion" onclick="askQuestion('Is he open to work?')">Available?</button>
+    <button class="chat-suggestion" data-q-en="What did Abhishek build at KPN?" data-q-nl="Wat heeft Abhishek bij KPN gebouwd?" onclick="askQuestion(this)">KPN?</button>
+    <button class="chat-suggestion" data-q-en="Tell me about the FedEx project" data-q-nl="Vertel over het FedEx-project" onclick="askQuestion(this)">FedEx?</button>
+    <button class="chat-suggestion" data-q-en="What is his Kafka experience?" data-q-nl="Wat is zijn Kafka-ervaring?" onclick="askQuestion(this)">Kafka?</button>
+    <button class="chat-suggestion" data-q-en="Which clients has he worked for?" data-q-nl="Voor welke klanten heeft hij gewerkt?" onclick="askQuestion(this)">Klanten?</button>
+    <button class="chat-suggestion" data-q-en="Is he available for work?" data-q-nl="Is hij beschikbaar?" onclick="askQuestion(this)">Beschikbaar?</button>
+    <button class="chat-suggestion" data-q-en="What is his Azure experience?" data-q-nl="Wat is zijn Azure-ervaring?" onclick="askQuestion(this)">Azure?</button>
   </div>
   <div class="chatbot-input">
     <input type="text" id="chatInput" placeholder="Ask about Abhishek's experience..." onkeydown="handleChatKey(event)" />
@@ -925,6 +940,137 @@
 </div>
 
 <script>
+  // ============================================================
+  //  INTERNATIONALISATION  (EN default, NL toggle)
+  // ============================================================
+  const translations = {
+    en: {
+      'nav.about':      'About',
+      'nav.skills':     'Skills',
+      'nav.projects':   'Projects',
+      'nav.experience': 'Experience',
+      'nav.writing':    'Writing',
+      'nav.contact':    'Contact',
+      'nav.resume':     '↓ Resume',
+
+      'hero.availability': 'Open to Senior Roles · Amersfoort, Netherlands 🇳🇱',
+      'hero.role':         'Senior Full Stack Java Engineer',
+      'hero.tagline':      'I build backend systems that scale — and the AI that makes them smarter. <strong>14 years</strong> delivering enterprise Java systems across <strong>KPN, ABN Amro, FedEx, and TomTom</strong> — from Spring Boot microservices to Azure AKS production deployments.',
+      'hero.cta1':         'View My Work →',
+      'hero.cta2':         'Let\'s Connect',
+      'hero.stat1':        'Years in Java',
+      'hero.stat2':        'Enterprise Clients',
+      'hero.stat3':        'Dutch National',
+
+      'about.label': '01 — About',
+      'about.title': '14 years. Eight clients.<br><em style="font-style:italic;color:var(--accent)">One discipline.</em>',
+      'about.p1':    'I\'m a <strong>Dutch national Java engineer</strong> based in Amersfoort, Netherlands, with over 14 years delivering enterprise-grade backend systems. My clients have included <strong>KPN, ABN Amro Bank, FedEx Express, TomTom, ASML, Siemens, Bharti AXA, and Delta Airlines</strong> — organisations where reliability and uptime are non-negotiable.',
+      'about.p2':    'My core is <strong>Java 17 + Spring Boot 3 + microservices</strong>, wired into cloud-native infrastructure on <strong>Azure AKS</strong>. I\'ve led architecture teams at FedEx, served as Scrum Master at ABN Amro, designed Kafka-driven event pipelines, and built CI/CD practices that teams still run on years later.',
+      'about.p3':    'I hold a <strong>BE in Computer Science</strong> from JSS Academy (Visveswaraya Technological University, 2011). After a decade building foundations in India across Cognizant, Siemens, and Capgemini, I moved to the Netherlands and have been delivering complex backend systems for Dutch enterprise ever since.',
+
+      'skills.label':    '02 — Skills',
+      'skills.title':    'Full stack,<br>top to bottom.',
+      'skills.subtitle': 'From event-driven backends to containerised Azure deployments — 14 years across the full delivery pipeline.',
+
+      'projects.label':    '03 — Projects',
+      'projects.title':    'Systems I\'ve<br>shipped to production.',
+      'projects.subtitle': 'Architecture-first. Observable from day one. Built to survive real production loads.',
+
+      'exp.label':    '04 — Experience',
+      'exp.title':    '14 years.<br>8 clients.',
+      'exp.subtitle': 'From Cognizant India to Prodapt Netherlands — real enterprise delivery at every scale.',
+      'exp.nav1': 'Prodapt · KPN',
+      'exp.nav2': 'Infosys · ABN Amro',
+      'exp.nav3': 'FedEx Express NL',
+      'exp.nav4': 'Sogeti · TomTom',
+      'exp.nav5': 'Capgemini · ASML',
+      'exp.nav6': 'Siemens + Cognizant',
+
+      'blog.label': '05 — Writing',
+      'blog.title': 'Technical writing,<br>coming soon.',
+
+      'contact.label': '06 — Contact',
+      'contact.title': 'Let\'s build something<br><em>worth shipping.</em>',
+      'contact.desc':  '14 years of enterprise Java, cloud-native Azure deployments, and cross-functional delivery. Open to senior engineering and solution architecture roles across the Netherlands and beyond.',
+    },
+
+    nl: {
+      'nav.about':      'Over mij',
+      'nav.skills':     'Vaardigheden',
+      'nav.projects':   'Projecten',
+      'nav.experience': 'Ervaring',
+      'nav.writing':    'Blog',
+      'nav.contact':    'Contact',
+      'nav.resume':     '↓ CV',
+
+      'hero.availability': 'Beschikbaar voor senior functies · Amersfoort, Nederland 🇳🇱',
+      'hero.role':         'Senior Full Stack Java Engineer',
+      'hero.tagline':      'Ik bouw backend systemen die schaalbaar zijn — en de AI die ze slimmer maakt. <strong>14 jaar</strong> enterprise Java-systemen geleverd voor <strong>KPN, ABN Amro, FedEx en TomTom</strong> — van Spring Boot microservices tot Azure AKS productie-implementaties.',
+      'hero.cta1':         'Bekijk mijn werk →',
+      'hero.cta2':         'Neem contact op',
+      'hero.stat1':        'Jaar Java-ervaring',
+      'hero.stat2':        'Enterprise klanten',
+      'hero.stat3':        'Nederlandse nationaliteit',
+
+      'about.label': '01 — Over mij',
+      'about.title': '14 jaar. Acht klanten.<br><em style="font-style:italic;color:var(--accent)">Één vakgebied.</em>',
+      'about.p1':    'Ik ben een <strong>Java-engineer met de Nederlandse nationaliteit</strong>, woonachtig in Amersfoort, met meer dan 14 jaar ervaring in enterprise backendsystemen. Mijn klanten zijn onder andere <strong>KPN, ABN Amro Bank, FedEx Express, TomTom, ASML, Siemens, Bharti AXA en Delta Airlines</strong> — organisaties waar betrouwbaarheid en uptime geen optie zijn.',
+      'about.p2':    'Mijn kern is <strong>Java 17 + Spring Boot 3 + microservices</strong>, gekoppeld aan cloud-native infrastructuur op <strong>Azure AKS</strong>. Ik heb architectuurteams geleid bij FedEx, opgetreden als Scrum Master bij ABN Amro, Kafka-gestuurde eventpipelines ontworpen, en CI/CD-praktijken ingevoerd die teams jaren later nog steeds gebruiken.',
+      'about.p3':    'Ik heb een <strong>Bachelor of Engineering in Informatica</strong> van de JSS Academy (Visveswaraya Technological University, 2011). Na tien jaar bouwen in India via Cognizant, Siemens en Capgemini ben ik naar Nederland verhuisd, waar ik sindsdien complexe backendsystemen lever voor Nederlandse enterprise.',
+
+      'skills.label':    '02 — Vaardigheden',
+      'skills.title':    'Full stack,<br>van kop tot staart.',
+      'skills.subtitle': 'Van event-driven backends tot gecontaineriseerde Azure-implementaties — 14 jaar in de volledige delivery pipeline.',
+
+      'projects.label':    '03 — Projecten',
+      'projects.title':    'Systemen die ik<br>naar productie heb gebracht.',
+      'projects.subtitle': 'Architectuur eerst. Observeerbaar vanaf dag één. Gebouwd om echte productiebelasting te doorstaan.',
+
+      'exp.label':    '04 — Ervaring',
+      'exp.title':    '14 jaar.<br>8 klanten.',
+      'exp.subtitle': 'Van Cognizant India tot Prodapt Nederland — echte enterprise levering op elke schaal.',
+      'exp.nav1': 'Prodapt · KPN',
+      'exp.nav2': 'Infosys · ABN Amro',
+      'exp.nav3': 'FedEx Express NL',
+      'exp.nav4': 'Sogeti · TomTom',
+      'exp.nav5': 'Capgemini · ASML',
+      'exp.nav6': 'Siemens + Cognizant',
+
+      'blog.label': '05 — Schrijven',
+      'blog.title': 'Technische artikelen,<br>binnenkort beschikbaar.',
+
+      'contact.label': '06 — Contact',
+      'contact.title': 'Laten we iets bouwen<br><em>dat de moeite waard is.</em>',
+      'contact.desc':  '14 jaar enterprise Java, cloud-native Azure-implementaties en multidisciplinaire levering. Beschikbaar voor senior engineering- en solution architecture-functies in Nederland en daarbuiten.',
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    // Toggle button states
+    document.getElementById('langEN').classList.toggle('active', lang === 'en');
+    document.getElementById('langNL').classList.toggle('active', lang === 'nl');
+    // Swap all tagged elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const text = translations[lang][key];
+      if (text !== undefined) el.innerHTML = text;
+    });
+    // Update html lang attribute for accessibility
+    document.documentElement.setAttribute('lang', lang);
+    // Update chatbot placeholder
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) chatInput.placeholder = lang === 'nl'
+      ? 'Stel een vraag over Abhishek...'
+      : 'Ask about Abhishek\'s experience...';
+    // Update chatbot greeting
+    document.getElementById('chatLang').textContent = lang === 'nl'
+      ? 'Hallo! Stel me een vraag over Abhisheks 14-jarige Java-carrière — zijn werk bij KPN, FedEx, ABN Amro, TomTom en meer.'
+      : 'Hi! Ask me anything about Abhishek\'s 14-year Java career — his work at KPN, FedEx, ABN Amro, TomTom and more.';
+  }
+
   // Theme
   const themeToggle=document.getElementById('themeToggle');
   const html=document.documentElement;
@@ -982,16 +1128,43 @@
     window.open('Abhishek_CV_2026_03.pdf','_blank');
   }
 
-  // Exp nav
-  document.querySelectorAll('.exp-nav-item').forEach((btn,i)=>{
+  // ---- Experience nav: click scrolls to card; page scroll auto-highlights ----
+  const expNavBtns = document.querySelectorAll('.exp-nav-item');
+  const expItems   = document.querySelectorAll('.exp-item');
+
+  function setActiveNav(i){
+    expNavBtns.forEach(b=>b.classList.remove('active'));
+    expItems.forEach(it=>it.style.opacity='0.35');
+    if(expNavBtns[i]) expNavBtns[i].classList.add('active');
+    if(expItems[i])   expItems[i].style.opacity='1';
+  }
+
+  expNavBtns.forEach((btn,i)=>{
     btn.addEventListener('click',()=>{
-      document.querySelectorAll('.exp-nav-item').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const items=document.querySelectorAll('.exp-item');
-      items.forEach(it=>it.style.opacity='0.3');
-      if(items[i]){items[i].style.opacity='1';items[i].scrollIntoView({behavior:'smooth',block:'nearest'});}
+      setActiveNav(i);
+      if(expItems[i]){
+        const offset = expItems[i].getBoundingClientRect().top + window.scrollY - 110;
+        window.scrollTo({top: offset, behavior:'smooth'});
+      }
     });
   });
+
+  // Auto-highlight nav based on scroll position
+  window.addEventListener('scroll',()=>{
+    let closest = 0;
+    let minDist = Infinity;
+    expItems.forEach((item,i)=>{
+      const dist = Math.abs(item.getBoundingClientRect().top - 140);
+      if(dist < minDist){ minDist=dist; closest=i; }
+    });
+    expNavBtns.forEach(b=>b.classList.remove('active'));
+    expItems.forEach(it=>it.style.opacity='0.35');
+    if(expNavBtns[closest]) expNavBtns[closest].classList.add('active');
+    if(expItems[closest])   expItems[closest].style.opacity='1';
+  },{passive:true});
+
+  // Reset all cards visible initially
+  expItems.forEach(it=>it.style.opacity='1');
 
   // Chatbot
   const chatbotTrigger=document.getElementById('chatbotTrigger');
@@ -1003,37 +1176,135 @@
     chatbotTrigger.textContent=chatOpen?'✕':'🤖';
   });
 
+  // Bilingual knowledge base
   const kb={
-    'kpn':'At KPN (via Prodapt, Jan 2022–present), Abhishek builds Spring Boot 3 microservices with Java 17, Hibernate/JPA, and REST APIs. Integration via Apache Camel + ActiveMQ, deployed on Kubernetes with Jenkins + Azure DevOps CI/CD, and monitored via Elastic Stack.',
-    'abn amro':'At ABN Amro Bank (via Infosys NL, Jul–Dec 2021), Abhishek built REST services for Microsoft Teams integration, wired them to a Vue.js frontend, implemented Azure DevOps CI/CD, and served as Scrum Master across multiple sprints.',
-    'fedex':'At FedEx Express NL (Apr 2019–Jun 2021), Abhishek was promoted to Application Solution Architect. He led the microservices design team, built an API Gateway with Kafka integration, designed scalable DB schemas, and set up Docker + AKS CI/CD with Gradle.',
-    'tomtom':'At TomTom (via Sogeti NL, May 2017–Apr 2019), Abhishek built REST APIs for managing complex XML configuration files with multi-threaded caching. He also built regression tests in Python integrated with Jenkins.',
-    'asml':'At ASML (via Capgemini India, Sep 2016–Mar 2017), Abhishek built RESTful services with Spring Boot and Hibernate, transformed XSD schemas to Swagger templates, and collaborated with Business Analysts on technical designs.',
-    'azure':'Abhishek has production Azure experience: Azure Kubernetes Service (AKS), Azure App Services, Azure Storage, and Azure DevOps CI/CD pipelines — used across KPN, ABN Amro, and FedEx projects.',
-    'kafka':'Abhishek used Apache Kafka as the event integration backbone at FedEx NL — wiring microservices through an API Gateway with Kafka for decoupled, scalable messaging. He also has production experience with ActiveMQ and Apache Camel at KPN.',
-    'spring boot':'Spring Boot is Abhishek\'s primary backend framework across 14 years. He currently works with Spring Boot 3 + Java 17 at KPN, and has used Spring Boot across FedEx, ABN Amro, TomTom, ASML, and earlier Cognizant/Delta Airlines work.',
-    'open to work':'Yes — Abhishek is actively looking for senior engineering and solution architecture roles. Dutch national based in Amersfoort, Netherlands. Contact: abhisheksa.09@gmail.com or linkedin.com/in/abhishek-s-a-55bab92a',
-    'available':'Yes — Abhishek is actively looking for senior engineering and solution architecture roles. Dutch national based in Amersfoort, Netherlands. Contact: abhisheksa.09@gmail.com',
-    'experience':'Abhishek has 14 years of Java engineering experience across KPN, ABN Amro Bank, FedEx Express NL, TomTom, ASML, Siemens, Bharti AXA, and Delta Airlines — spanning telecom, banking, logistics, industrial, and airline software.',
-    'education':'Abhishek holds a Bachelor of Engineering in Computer Science from JSS Academy of Technical Education, Bangalore (Visveswaraya Technological University), graduated 2011.',
-    'location':'Abhishek is based in Amersfoort, Netherlands and holds Dutch nationality. Phone: +31 6 22 22 36 98.',
-    'docker':'Docker is standard kit for Abhishek — used at KPN and FedEx. He containerises Spring Boot services and deploys them on Kubernetes (AKS) clusters with automated CI/CD pipelines.',
-    'camel':'Abhishek uses Apache Camel at KPN (via Prodapt) for reliable backend microservice integration alongside ActiveMQ, building decoupled event-driven service communication.',
-    'angular':'Abhishek works with Angular 16 on the frontend. His earlier career included Angular 2.0 at Siemens. He integrates Angular frontends with Spring Boot backends.',
-    'scrum':'Abhishek served as Scrum Master at ABN Amro Bank while simultaneously delivering as a full stack developer — he facilitates Agile ceremonies and coordinates cross-team delivery.',
+    en:[
+      {keys:['kpn','prodapt','current role','current job','currently'],
+       ans:'At <strong>KPN</strong> (via Prodapt, Jan 2022–present), Abhishek designs Spring Boot 3 microservices using Java 17, Hibernate/JPA, and REST APIs. Services are integrated via Apache Camel + ActiveMQ, containerised in Docker, deployed on Azure AKS, and monitored through the Elastic Stack (ELK). He also mentors junior developers and handles production incidents.'},
+      {keys:['abn amro','infosys','bank','teams','microsoft teams','vue'],
+       ans:'At <strong>ABN Amro Bank</strong> (via Infosys NL, Jul–Dec 2021), Abhishek built REST services for a Microsoft Teams integration and connected them to a Vue.js frontend. He implemented Azure DevOps CI/CD pipelines and served as Scrum Master across multiple sprint iterations.'},
+      {keys:['fedex','logistics','architect','solution architect','api gateway'],
+       ans:'At <strong>FedEx Express NL</strong> (Apr 2019–Jun 2021), Abhishek was promoted to Application Solution Architect. He led the microservices design team, implemented an API Gateway with Apache Kafka, designed scalable DB schemas, containerised with Docker, and deployed on Azure AKS using Gradle CI/CD.'},
+      {keys:['tomtom','sogeti','xml','configuration','regression','python'],
+       ans:'At <strong>TomTom</strong> (via Sogeti NL, May 2017–Apr 2019), Abhishek built REST APIs for complex XML-based configuration files with multi-threaded caching. He wrote Mockito unit tests, configured Maven builds, and built regression tests in Python integrated with Jenkins.'},
+      {keys:['asml','capgemini','xsd','swagger','schema'],
+       ans:'At <strong>ASML</strong> (via Capgemini India, Sep 2016–Mar 2017), Abhishek built RESTful services with Spring Boot and Hibernate, transformed XSD schemas into Swagger/OpenAPI templates, managed Maven builds, and collaborated with Business Analysts on technical designs.'},
+      {keys:['siemens','plugin','industrial','angular 2'],
+       ans:'At <strong>Siemens India</strong> (Dec 2015–Aug 2016), Abhishek engineered product plugins using core Java — Collections, Interfaces, and Exception Handling — built an Angular 2.0 demo app, and delivered critical production support for industrial software.'},
+      {keys:['cognizant','delta','airline','bharti','axa','insurance'],
+       ans:'At <strong>Cognizant India</strong>, Abhishek worked for two clients: <strong>Delta Airlines</strong> (Jun 2012–Jul 2013) — scalable REST APIs with Spring Boot 2, logging, and mentoring; and <strong>Bharti AXA</strong> (Sep 2014–Oct 2015) — secured RESTful services, SQL optimisation, and UI/backend integration.'},
+      {keys:['kafka','activemq','camel','messaging','event','event-driven','queue','broker'],
+       ans:'Abhishek has production messaging experience with <strong>Apache Kafka</strong> at FedEx NL (API Gateway integration) and <strong>Apache Camel + ActiveMQ</strong> at KPN (microservice integration layer). He understands the trade-offs and knows when to use each.'},
+      {keys:['azure','aks','cloud','app service','azure storage','azure devops'],
+       ans:'Abhishek has hands-on production <strong>Azure</strong> experience: Azure Kubernetes Service (AKS) at KPN and FedEx, Azure App Services, Azure Storage, and Azure DevOps CI/CD pipelines at ABN Amro and KPN.'},
+      {keys:['kubernetes','k8s','docker','container','helm'],
+       ans:'Abhishek containerises all Java microservices with <strong>Docker</strong> and deploys them on <strong>Kubernetes (Azure AKS)</strong> at KPN and FedEx. He sets up full CI/CD automation with Jenkins and Azure DevOps for repeatable, auditable deployments.'},
+      {keys:['spring boot','spring','hibernate','jpa','rest','microservice','java'],
+       ans:'<strong>Java + Spring Boot</strong> is Abhishek\'s primary stack across 14 years. He currently runs Java 17 + Spring Boot 3 + Hibernate 6/JPA at KPN, and has used it at every client: FedEx, ABN Amro, TomTom, ASML, and Cognizant.'},
+      {keys:['ci','cd','jenkins','pipeline','gitlab','build','deploy','sonarqube'],
+       ans:'CI/CD is core to Abhishek\'s delivery practice: <strong>Jenkins</strong> pipelines at KPN and FedEx, <strong>Azure DevOps</strong> at ABN Amro and KPN, with SonarQube quality gates, GitLab CI, and Gradle/Maven build automation enforced on every PR.'},
+      {keys:['monitor','observ','elastic','kibana','grafana','prometheus','logging','elk'],
+       ans:'Abhishek sets up observability from day one: <strong>Elastic Stack (ELK)</strong> at KPN, <strong>Prometheus + Grafana</strong> for metrics, <strong>Kibana</strong> for log analysis, and <strong>SonarQube</strong> for code quality gates.'},
+      {keys:['angular','frontend','vue','node','typescript','ui'],
+       ans:'On the frontend Abhishek works with <strong>Angular 16</strong> (current), <strong>Vue.js</strong> (ABN Amro), and has Node.js integration experience. He built Angular 2.0 at Siemens and connects all frontends to Spring Boot REST backends.'},
+      {keys:['scrum','agile','scrum master','sprint','iteration'],
+       ans:'Abhishek served as <strong>Scrum Master</strong> at ABN Amro Bank (Infosys NL) while simultaneously delivering as a full stack developer — sprint planning, reviews, retrospectives, and cross-team coordination.'},
+      {keys:['test','junit','mockito','unit','quality','coverage'],
+       ans:'Abhishek writes test suites using <strong>JUnit 5 + Mockito</strong> across all projects, enforces coverage through SonarQube quality gates in CI pipelines, and conducts thorough code reviews with documented impact analysis.'},
+      {keys:['mysql','oracle','database','db','sql','dynamo','nosql','h2'],
+       ans:'Production database experience with <strong>MySQL</strong> (KPN), <strong>Oracle</strong> (enterprise), <strong>DynamoDB</strong> (NoSQL), and <strong>H2</strong> for in-memory testing. He designs scalable schemas and optimises slow queries.'},
+      {keys:['available','open to','looking','job','hire','opportunit','role','position','work'],
+       ans:'✅ Yes — Abhishek is actively open to senior engineering and solution architecture roles. Dutch national, Amersfoort, Netherlands.<br>📧 abhisheksa.09@gmail.com<br>📞 +31 6 22 22 36 98<br>💼 linkedin.com/in/abhishek-s-a-55bab92a'},
+      {keys:['education','degree','university','jss','vtu','bangalore','college','study'],
+       ans:'Abhishek holds a <strong>Bachelor of Engineering in Computer Science</strong> from JSS Academy of Technical Education, Bangalore (Visveswaraya Technological University) — graduated 2011.'},
+      {keys:['location','netherlands','amersfoort','dutch','national','where','live'],
+       ans:'Abhishek is based in <strong>Amersfoort, Netherlands</strong> and holds Dutch nationality. He has been working in the Netherlands since 2017 at KPN, ABN Amro, FedEx, TomTom, and ASML.'},
+      {keys:['contact','email','phone','linkedin','reach','touch'],
+       ans:'📧 abhisheksa.09@gmail.com<br>📞 +31 6 22 22 36 98<br>💼 linkedin.com/in/abhishek-s-a-55bab92a'},
+      {keys:['year','experience','how long','senior','career','background','history'],
+       ans:'Abhishek has <strong>14 years</strong> of Java engineering experience (since 2012) across KPN, ABN Amro Bank, FedEx Express NL, TomTom, ASML, Siemens, Bharti AXA, and Delta Airlines — telecom, banking, logistics, industrial, and airline software.'},
+      {keys:['client','clients','who','company','companies','worked for'],
+       ans:'Abhishek\'s client roster: <strong>KPN</strong> (telecom), <strong>ABN Amro Bank</strong> (banking), <strong>FedEx Express NL</strong> (logistics), <strong>TomTom</strong> (navigation), <strong>ASML</strong> (semiconductor), <strong>Siemens</strong> (industrial), <strong>Bharti AXA</strong> (insurance), <strong>Delta Airlines</strong> (aviation).'},
+    ],
+    nl:[
+      {keys:['kpn','prodapt','huidige rol','huidige baan','momenteel','nu'],
+       ans:'Bij <strong>KPN</strong> (via Prodapt, jan 2022–heden) ontwerpt Abhishek Spring Boot 3-microservices met Java 17, Hibernate/JPA en REST API\'s. Services worden geïntegreerd via Apache Camel + ActiveMQ, gecontaineriseerd in Docker, gedeployed op Azure AKS en gemonitord via de Elastic Stack (ELK). Hij begeleidt ook junior developers.'},
+      {keys:['abn amro','infosys','bank','teams','microsoft teams','vue'],
+       ans:'Bij <strong>ABN Amro Bank</strong> (via Infosys NL, jul–dec 2021) bouwde Abhishek REST-services voor een Microsoft Teams-integratie en koppelde deze aan een Vue.js-frontend. Hij implementeerde Azure DevOps CI/CD-pipelines en trad op als Scrum Master tijdens meerdere sprintiteraties.'},
+      {keys:['fedex','logistiek','architect','solution architect','api gateway'],
+       ans:'Bij <strong>FedEx Express NL</strong> (apr 2019–jun 2021) werd Abhishek gepromoveerd tot Application Solution Architect. Hij leidde het microservicesontwerp-team, implementeerde een API Gateway met Apache Kafka, ontwierp schaalbare databaseschema\'s en zette Docker + Azure AKS-deployment op met Gradle CI/CD.'},
+      {keys:['tomtom','sogeti','xml','configuratie','regressie','python'],
+       ans:'Bij <strong>TomTom</strong> (via Sogeti NL, mei 2017–apr 2019) bouwde Abhishek REST API\'s voor complexe XML-configuratiebestanden met multi-threaded caching. Hij schreef Mockito-unittests, configureerde Maven-builds en ontwikkelde regressietests in Python gekoppeld aan Jenkins.'},
+      {keys:['asml','capgemini','xsd','swagger','schema'],
+       ans:'Bij <strong>ASML</strong> (via Capgemini India, sep 2016–mrt 2017) bouwde Abhishek RESTful services met Spring Boot en Hibernate, transformeerde XSD-schema\'s naar Swagger/OpenAPI-templates, beheerde Maven-builds en werkte samen met Business Analysts aan technische ontwerpen.'},
+      {keys:['siemens','plugin','industrieel','angular 2'],
+       ans:'Bij <strong>Siemens India</strong> (dec 2015–aug 2016) ontwikkelde Abhishek productplugins met core Java — Collections, Interfaces en Exception Handling — bouwde een Angular 2.0-demoapp en leverde kritieke productieondersteuning voor industriële software.'},
+      {keys:['cognizant','delta','luchtvaart','bharti','axa','verzekering'],
+       ans:'Bij <strong>Cognizant India</strong> werkte Abhishek voor twee klanten: <strong>Delta Airlines</strong> (jun 2012–jul 2013) — schaalbare REST API\'s, logging en mentoring; en <strong>Bharti AXA</strong> (sep 2014–okt 2015) — beveiligde REST-services, SQL-optimalisatie en UI/backend-integratie.'},
+      {keys:['kafka','activemq','camel','messaging','event','wachtrij','broker'],
+       ans:'Abhishek heeft productie-ervaring met <strong>Apache Kafka</strong> bij FedEx NL (API Gateway-integratie) en <strong>Apache Camel + ActiveMQ</strong> bij KPN (microservice-integratielaag). Hij begrijpt de afwegingen en weet wanneer welke technologie het beste past.'},
+      {keys:['azure','aks','cloud','app service','azure storage','azure devops'],
+       ans:'Abhishek heeft praktijkervaring met <strong>Azure</strong>: Azure Kubernetes Service (AKS) bij KPN en FedEx, Azure App Services, Azure Storage en Azure DevOps CI/CD-pipelines bij ABN Amro en KPN.'},
+      {keys:['kubernetes','k8s','docker','container','helm'],
+       ans:'Abhishek containeriseert alle Java-microservices met <strong>Docker</strong> en deployt ze op <strong>Kubernetes (Azure AKS)</strong> bij KPN en FedEx. Hij richt volledige CI/CD-automatisering in met Jenkins en Azure DevOps voor herhaalbare en auditeerbare deployments.'},
+      {keys:['spring boot','spring','hibernate','jpa','rest','microservice','java'],
+       ans:'<strong>Java + Spring Boot</strong> is Abhisheks primaire stack gedurende 14 jaar. Hij werkt momenteel met Java 17 + Spring Boot 3 + Hibernate 6/JPA bij KPN, en heeft het gebruikt bij elke klant: FedEx, ABN Amro, TomTom, ASML en Cognizant.'},
+      {keys:['ci','cd','jenkins','pipeline','gitlab','build','deploy','sonarqube'],
+       ans:'CI/CD is essentieel in Abhisheks werkwijze: <strong>Jenkins</strong>-pipelines bij KPN en FedEx, <strong>Azure DevOps</strong> bij ABN Amro en KPN, met SonarQube-kwaliteitspoorten en Gradle/Maven-buildautomatisering op elke PR.'},
+      {keys:['monitor','observ','elastic','kibana','grafana','prometheus','logging','elk'],
+       ans:'Abhishek richt observability in vanaf dag één: <strong>Elastic Stack (ELK)</strong> bij KPN, <strong>Prometheus + Grafana</strong> voor metrics, <strong>Kibana</strong> voor loganalyse en <strong>SonarQube</strong> voor codekwaliteitspoorten.'},
+      {keys:['angular','frontend','vue','node','typescript','ui'],
+       ans:'Op de frontend werkt Abhishek met <strong>Angular 16</strong> (huidig), <strong>Vue.js</strong> (ABN Amro) en heeft hij Node.js-integratieervaring. Hij bouwde Angular 2.0 bij Siemens en koppelt alle frontends aan Spring Boot REST-backends.'},
+      {keys:['scrum','agile','scrum master','sprint','iteratie'],
+       ans:'Abhishek trad op als <strong>Scrum Master</strong> bij ABN Amro Bank (Infosys NL) terwijl hij tegelijkertijd als full stack developer leverde — sprint planning, reviews, retrospectives en afstemming tussen teams.'},
+      {keys:['test','junit','mockito','unit','kwaliteit','coverage','dekking'],
+       ans:'Abhishek schrijft testsuites met <strong>JUnit 5 + Mockito</strong> bij alle projecten, handhaaft coverage via SonarQube-kwaliteitspoorten in CI-pipelines en voert grondige codereviews uit met gedocumenteerde impactanalyses.'},
+      {keys:['mysql','oracle','database','db','sql','dynamo','nosql','h2'],
+       ans:'Productie-databaseervaring met <strong>MySQL</strong> (KPN), <strong>Oracle</strong> (enterprise), <strong>DynamoDB</strong> (NoSQL) en <strong>H2</strong> voor in-memory testen. Hij ontwerpt schaalbare schema\'s en optimaliseert trage queries.'},
+      {keys:['beschikbaar','open voor','zoek','vacature','aannemen','opportunit','functie','werk','baan'],
+       ans:'✅ Ja — Abhishek staat open voor senior engineering- en solution architecture-functies. Nederlandse nationaliteit, Amersfoort.<br>📧 abhisheksa.09@gmail.com<br>📞 +31 6 22 22 36 98<br>💼 linkedin.com/in/abhishek-s-a-55bab92a'},
+      {keys:['opleiding','diploma','universiteit','jss','vtu','bangalore','studie','college'],
+       ans:'Abhishek heeft een <strong>Bachelor of Engineering in Informatica</strong> van de JSS Academy of Technical Education, Bangalore (Visveswaraya Technological University) — afgestudeerd in 2011.'},
+      {keys:['locatie','nederland','amersfoort','dutch','nationali','woon','waar'],
+       ans:'Abhishek woont in <strong>Amersfoort, Nederland</strong> en heeft de Nederlandse nationaliteit. Hij werkt in Nederland sinds 2017 — bij KPN, ABN Amro, FedEx, TomTom en ASML.'},
+      {keys:['contact','e-mail','telefoon','linkedin','bereiken','benaderen'],
+       ans:'📧 abhisheksa.09@gmail.com<br>📞 +31 6 22 22 36 98<br>💼 linkedin.com/in/abhishek-s-a-55bab92a'},
+      {keys:['jaar','ervaring','hoe lang','senior','carrière','achtergrond','geschiedenis'],
+       ans:'Abhishek heeft <strong>14 jaar</strong> Java-engineeringervaring (sinds 2012) bij KPN, ABN Amro Bank, FedEx Express NL, TomTom, ASML, Siemens, Bharti AXA en Delta Airlines — telecom, bankwezen, logistiek, industrie en luchtvaart.'},
+      {keys:['klant','klanten','wie','bedrijf','bedrijven','gewerkt voor'],
+       ans:'Abhisheks klantenlijst: <strong>KPN</strong> (telecom), <strong>ABN Amro Bank</strong> (bankwezen), <strong>FedEx Express NL</strong> (logistiek), <strong>TomTom</strong> (navigatie), <strong>ASML</strong> (halfgeleiders), <strong>Siemens</strong> (industrie), <strong>Bharti AXA</strong> (verzekeringen), <strong>Delta Airlines</strong> (luchtvaart).'},
+    ]
+  };
+
+  const fallback = {
+    en: 'I may not have that detail! Reach Abhishek at abhisheksa.09@gmail.com or +31 6 22 22 36 98. LinkedIn: linkedin.com/in/abhishek-s-a-55bab92a',
+    nl: 'Dat weet ik niet precies! Neem contact op via abhisheksa.09@gmail.com of +31 6 22 22 36 98. LinkedIn: linkedin.com/in/abhishek-s-a-55bab92a'
   };
 
   function getBotResponse(msg){
-    const lower=msg.toLowerCase();
-    for(const[k,v]of Object.entries(kb)){if(lower.includes(k))return v;}
-    return "Great question! Reach Abhishek directly at abhisheksa.09@gmail.com or connect on LinkedIn at linkedin.com/in/abhishek-s-a-55bab92a — he typically responds within 24 hours.";
+    const lower = msg.toLowerCase();
+    const entries = kb[currentLang] || kb.en;
+    for(const entry of entries){
+      if(entry.keys.some(k => lower.includes(k))) return entry.ans;
+    }
+    // Also try EN as fallback if NL selected but no NL match (for tech terms typed in English)
+    if(currentLang === 'nl'){
+      for(const entry of kb.en){
+        if(entry.keys.some(k => lower.includes(k))) return entry.ans;
+      }
+    }
+    return fallback[currentLang] || fallback.en;
   }
 
-  function addMsg(text,type){
-    const msgs=document.getElementById('chatMsgs');
-    const div=document.createElement('div');
-    div.className=`chat-msg ${type}`;div.textContent=text;
-    msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+  function addMsg(text, type){
+    const msgs = document.getElementById('chatMsgs');
+    const div = document.createElement('div');
+    div.className = `chat-msg ${type}`;
+    // Use innerHTML so bold tags and line breaks in answers render
+    if(type === 'bot') div.innerHTML = text;
+    else div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
   }
   function showTyping(){
     const msgs=document.getElementById('chatMsgs');
@@ -1050,7 +1321,13 @@
     showTyping();
     setTimeout(()=>{removeTyping();addMsg(getBotResponse(msg),'bot');},800+Math.random()*400);
   }
-  function askQuestion(q){document.getElementById('chatInput').value=q;sendChat();}
+  function askQuestion(btnOrStr){
+    const q = typeof btnOrStr === 'string'
+      ? btnOrStr
+      : (btnOrStr.getAttribute('data-q-' + currentLang) || btnOrStr.getAttribute('data-q-en'));
+    document.getElementById('chatInput').value = q;
+    sendChat();
+  }
   function handleChatKey(e){if(e.key==='Enter')sendChat();}
 </script>
 </body>
